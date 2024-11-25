@@ -1,0 +1,127 @@
+body {
+    font-family: "Titillium Web", sans-serif !important;
+    background-color: #F5F6FA !important;
+}
+
+/* General */
+
+.card {
+    border: 0px !important;
+}
+
+.table thead tr th {
+    background-color: #f2f3f9 !important;
+    font-weight: bold !important;
+}
+
+
+table.dataTable.table.table-striped > tbody > tr:nth-of-type(2n+1) > * {
+    box-shadow: none !important;
+    color: #8A92A6 !important;
+}
+
+
+.perfil {
+    width: 70px;
+    border-radius: 50%;
+    height: 70px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.perfil_null {
+    width: 43px;
+    border-radius: 50%;
+    height: 43px;
+    object-fit: cover;
+    object-position: top;
+}
+
+div#button_cerrar {
+    background-color: #146836;
+    margin-left: 34px;
+    font-size: 19px;
+    right: -20px;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.sidebar.sidebar-default .nav-link:not(.static-item).active, .sidebar.sidebar-default .nav-link:not(.static-item)[aria-expanded=true],
+.sidebar.sidebar-default .nav-link:not(.static-item):hover:not(.active):not([aria-expanded=true]) {
+    background: #14683636;
+    color: #146836;
+    -webkit-box-shadow: unset;
+    box-shadow: unset;
+}
+
+/* CRUD */
+  
+div#put__guardar,
+div#delete__guardar,
+div#post__guardar {
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+}
+
+td.td_botones {
+    display: flex;
+    gap: 14px;
+}
+
+div#put__respuesta,
+div#delete__respuesta,
+div#post__respuesta {
+    margin-top: 20px;
+}
+
+div#put__respuesta i,
+div#delete__respuesta i,
+div#post__respuesta i {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #198754;
+}
+
+div#put__respuesta .fa-check-circle,
+div#delete__respuesta .fa-check-circle,
+div#post__respuesta .fa-check-circle {
+    color: #198754;
+}
+
+div#put__respuesta .fa-times-circle,
+div#delete__respuesta .fa-times-circle,
+div#post__respuesta .fa-times-circle {
+    color: #dc3545;
+}
+
+div#put__respuesta span,
+div#delete__respuesta span,
+div#post__respuesta span {
+    display: block;
+    text-align: center;
+    font-size: 21px;
+}
+
+div#put__respuesta span button,
+div#delete__respuesta span button,
+div#post__respuesta span button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+div#delete__mensaje {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+label {
+    margin-top: 10px;
+}
