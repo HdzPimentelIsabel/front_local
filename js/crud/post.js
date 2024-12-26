@@ -72,18 +72,28 @@ $(document).on('click', '#post__imprimir', function (e) {
     }
 
     $.ajax({
-        url: 'crud/postImp.php', 
+        url: 'crud/postImp.php',
         cache: false,
         contentType: false,
-        processData: false,   
+        processData: false,
         type: 'post',
         xhrFields: {
-            responseType: 'blob' 
+            responseType: 'blob' // Recibir como blob
         },
         success: function (response) {
             var blob = new Blob([response], { type: 'application/pdf' });
             var url = URL.createObjectURL(blob);
-            window.open(url, '_blank');   
+
+            // Abre el popup con opciones específicas
+            var popup = window.open(
+                url,
+                'ReportePDF',
+                'width=800,height=600,scrollbars=no,resizable=no'
+            );
+
+            if (!popup || popup.closed || typeof popup.closed == 'undefined') {
+                alert('Por favor, habilita los popups en tu navegador.');
+            }
         },
         error: function (xhr, status, error) {
             console.error("Error al generar el reporte:", error);
@@ -91,3 +101,4 @@ $(document).on('click', '#post__imprimir', function (e) {
         }
     });
 });
+
