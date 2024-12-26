@@ -60,3 +60,34 @@ $(document).on('click', '#post__guardar',  function(e){
         });
     }
 });
+
+$(document).on('click', '#post__imprimir', function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    var endpoint = $(this).data("endpoint");
+    if (!endpoint) {
+        console.error("El atributo 'endpoint' no está definido.");
+        return;
+    }
+
+    $.ajax({
+        url: 'crud/postImp.php', 
+        cache: false,
+        contentType: false,
+        processData: false,   
+        type: 'post',
+        xhrFields: {
+            responseType: 'blob' 
+        },
+        success: function (response) {
+            var blob = new Blob([response], { type: 'application/pdf' });
+            var url = URL.createObjectURL(blob);
+            window.open(url, '_blank');   
+        },
+        error: function (xhr, status, error) {
+            console.error("Error al generar el reporte:", error);
+            $('#post__respuesta').css('display', 'block').text('Hubo un error. Por favor, intenta nuevamente.');
+        }
+    });
+});
