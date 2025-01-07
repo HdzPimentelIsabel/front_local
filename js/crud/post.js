@@ -61,44 +61,32 @@ $(document).on('click', '#post__guardar',  function(e){
     }
 });
 
-$(document).on('click', '#post__imprimir', function (e) {
+$(document).on('click', '#post__imprimir', function(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
 
-    var endpoint = $(this).data("endpoint");
-    if (!endpoint) {
-        console.error("El atributo 'endpoint' no está definido.");
-        return;
-    }
+    var form_data = new FormData();
+    form_data.append("endpoint", $(this).data("endpoint"));
+    form_data.append("json", ''); 
+    form_data.append("imprimir", true); 
 
     $.ajax({
-        url: 'crud/postImp.php',
+        url: 'crud/post.php', // Asegúrate de que este archivo exista y maneje la lógica de generación del archivo para impresión.
+        dataType: 'text', 
         cache: false,
         contentType: false,
         processData: false,
-        type: 'post',
-        xhrFields: {
-            responseType: 'blob' // Recibir como blob
+        async: false,
+        data: form_data,                         
+        type: 'POST',
+       success: function(response){
+ 	    const iframe = `<iframe src="${response}" style="width: 100%; height: 600px;" frameborder="0"></iframe>`;
+            $('#reporteContent').html(iframe);
+            $('#reporteModal').modal('show');
         },
-        success: function (response) {
-            var blob = new Blob([response], { type: 'application/pdf' });
-            var url = URL.createObjectURL(blob);
-
-            // Abre el popup con opciones específicas
-            var popup = window.open(
-                url,
-                'ReportePDF',
-                'width=800,height=600,scrollbars=no,resizable=no'
-            );
-
-            if (!popup || popup.closed || typeof popup.closed == 'undefined') {
-                alert('Por favor, habilita los popups en tu navegador.');
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("Error al generar el reporte:", error);
-            $('#post__respuesta').css('display', 'block').text('Hubo un error. Por favor, intenta nuevamente.');
+        error: function(xhr, status, error) {
+            console.error("Error en la solicitud: ", error);
+            alert('Hubo un problema al procesar la solicitud.');
         }
     });
 });
-

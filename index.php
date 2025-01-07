@@ -392,9 +392,7 @@ $show_seccion = "secciones/".$seccion.'.php';
                     <div class="row">
                         <div class="col-sm-12 col-lg-12">
                             <div class="card">
-                                <div class="card-body">
-                                    <p><?= $config->descripcion ?></p>
-                                    <!-- Conenido de la seccion -->
+                                <div class="card-body">                                   
                                     <?php include $show_seccion; ?>
                                 </div>
                             </div>

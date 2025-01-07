@@ -5,10 +5,11 @@ error_reporting(E_ALL);
 // Variables navegados
 $endpoint = $_REQUEST['endpoint'];
 $json = $_REQUEST['json'];
+$imprimir = $_REQUEST['imprimir'];
 // CURL al endpoint POST
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://api.siaweb.com.mx/api/'.$endpoint.'/create',
+  CURLOPT_URL => 'https://api.siaweb.com.mx/api/'.$endpoint.'/'.($imprimir ? 'generaReporte': 'create'),
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -18,10 +19,9 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => 'POST',
   CURLOPT_POSTFIELDS => $json,
   CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
-));
+  )
+);
 $data = curl_exec($curl);
 curl_close($curl);
-// Retornar respuesta y enviar el estatus
 $post__response = json_decode($data);
-//print_r($post__response);
-echo $post__response->status;
+echo ($imprimir ? $post__response->message: $post__response->status);
