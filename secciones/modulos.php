@@ -6,10 +6,18 @@ include 'crud/get.php';
 ?> 
 
 <!-- Botón nuevo -->
-<div id="buton_nuevo" class="btn btn-outline-success" data-titulo="Nuevo módulo">
-    <i class="fas fa-plus"></i>
+<div id="buton_nuevo" class="btn btn-primary" style="border: 0px; background-color: #146836;" data-titulo="Nuevo módulo" >
+   <img src="/images/agregar.png" title="Agregar" alt="Agregar" style="background-color: transparent; width: 30px; height: 30px; "> 
+   Nuevo
 </div>         
-<div id="post__imprimir" class="btn btn-success" data-endpoint="<?= $config->endpoint ?>">Imprimir</div>
+<div id="post__imprimir"  class="btn btn-primary" style="border: 0px; background-color: #146836;" data-endpoint="<?= $config->endpoint ?>">
+    <img src="/images/pdf.png" title="Imprime pdf" alt="Imprimir pdf" style="background-color: transparent; width: 30px; height: 30px; "> 
+    PDF  
+</div>
+<div id="post__imprimir" class="btn btn-primary" style="border: 0px; background-color: #146836;" data-endpoint="<?= $config->endpoint ?>">
+   <img src="/images/csv.png" title="Imprime csv" alt="Imprimir csv" style="background-color: transparent; width: 30px; height: 30px; "> 
+    Excel  
+</div>       
 
 <div class="modal fade" id="reporteModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -43,31 +51,31 @@ include 'crud/get.php';
 <table id="tabla_modulos" class="table table-striped" style="width:100%">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Descripción</th>
-            <th>Icono</th>
-            <th>Alias</th>
+            <th style="text-align: left;">ID</th>
+            <th style="text-align: left;">Descripción</th>
+            <th style="text-align: left;">Icono</th>
+            <th style="text-align: left;">Alias</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($get__response->modulos as $item) { ?>   
-            <tr>
-                <td><?= $item->idModulo ?></td>
-                <td><?= $item->descripcion ?></td>
+            <tr>  
+                <td style="text-align: left;"><?= $item->idModulo ?></td>
+                <td style="text-align: left;"><?= $item->descripcion ?></td>
                 <td><?= ($item->icono == null) ? "--" : $item->icono ?></td>
                 <td><?= ($item->alias == null) ? "--" : $item->alias ?></td>
                 <td class="td_botones">
-                    <div class="btn btn-light" id="buton_editar" 
+                    <div id="buton_editar" 
                          data-titulo="Editar el modulo <?= $item->idModulo ?>" 
                          data-id="<?= $item->idModulo ?>" data-descripcion="<?= $item->descripcion ?>" 
                          data-icono="<?= $item->icono ?>" data-alias="<?= $item->alias ?>">
-                        <i class="fas fa-edit"></i> Editar
+                         <img src="/images/editar.png" alt="Editar" title="Editar" style="border:none;background-color: transparent; width: 20px; height: 20x; "> 
                     </div>
-                    <div class="btn btn-light" id="buton_eliminar"  
+                    <div id="buton_eliminar"  
                          data-mensaje="Realmente desea eliminar módulo con el ID <?= $item->idModulo ?>" 
                          data-id="<?= $item->idModulo ?>">
-                        <i class="fas fa-trash-alt"></i> Eliminar
+                         <img src="/images/eliminar.png" alt="Eliminar" title="Eliminar" style="border:none;background-color: transparent; width: 25px; height: 25px; "> 
                     </div>
                 </td>
             </tr>
@@ -118,4 +126,3 @@ include 'crud/get.php';
 <script> 
     <?= DataTable('tabla_modulos') ?>
 </script>
-
